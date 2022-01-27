@@ -1,0 +1,152 @@
+@use "../../scss/" as *;
+
+.logo {
+  font-size: rem(40);
+  font-weight: 600;
+  margin-right: rem(50);
+  @include flex(center, unset);
+
+  img {
+    height: 25px;
+    @include flex(center, center);
+
+    @include mobile {
+      width: 60px;
+      margin-right: 0;
+    }
+  }
+}
+
+.header {
+  height: $header-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
+  transition: height 0.3s ease, background-color 0.3s ease;
+  @include mobile {
+    height: 5rem;
+  }
+
+  &.shrink {
+    height: $header-height;
+    background-color: $body-bg;
+  }
+
+  &__wrap {
+    @include flex(center, space-between);
+    height: 100%;
+    padding: 0 rem(48);
+    @include mobile {
+      padding: 0 rem(40);
+    }
+
+    &__left {
+      @include flex(center, unset);
+    }
+
+    &__right {
+      @include flex(center, unset);
+      & > * ~ * {
+        margin-left: rem(16);
+      }
+
+      &__img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      &__profile {
+        @include flex(center, unset);
+        cursor: pointer;
+
+        .options {
+          display: none;
+          background-color: $body-bg;
+          border-radius: 5px;
+        }
+
+        span {
+          padding: 10px;
+          cursor: pointer;
+        }
+
+        &:hover {
+          .options {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 52px;
+            right: 10px;
+          }
+        }
+
+        &__icon {
+          font-size: 28px !important;
+        }
+      }
+
+      &__icon {
+        @include mobile {
+          font-size: rem(32) !important;
+        }
+      }
+    }
+  }
+
+  &__nav {
+    @include flex(center, unset);
+    & > * ~ * {
+      margin-left: rem(32);
+    }
+
+    li {
+      padding: rem(5) 0;
+      font-weight: 700;
+      position: relative;
+      font-size: rem(16);
+
+      @include mobile {
+        font-size: rem(20);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        transition: width 0.5s ease;
+        height: rem(2);
+        background-color: $main-color;
+      }
+
+      &.active::after,
+      &:hover::after {
+        width: 100%;
+      }
+    }
+
+    @include mobile {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 5rem;
+      width: 100%;
+      background-color: $body-bg;
+      padding: 0 2rem;
+      box-shadow: $box-shadow;
+
+      @include flex(center, space-between);
+
+      & > * ~ * {
+        margin-left: 0;
+      }
+    }
+  }
+}

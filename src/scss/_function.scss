@@ -1,0 +1,7 @@
+@use "sass:math";
+
+// Source: https://css-tricks.com/snippets/sass/px-to-em-functions/
+@function rem($pixels, $context: 16) {
+  // math.div(8 /16) * 1rem = .5rem like use this. math.div() take two parameter and calculte useing division return the value of rem
+  @return (math.div($pixels, $context)) * 1rem;
+}
